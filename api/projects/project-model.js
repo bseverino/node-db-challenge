@@ -37,6 +37,15 @@ function findById(id) {
         })
 }
 
+// async function add(data) {
+//     db('project').insert(data)
+//         .then(res => {
+//             console.log(res)
+//         })
+    
+    
+// }
+
 function add(data) {
     return db('project')
         .insert(data)
