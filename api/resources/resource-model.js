@@ -7,19 +7,16 @@ module.exports = {
 }
 
 function find() {
-    return db('resources')
+    return db('resource')
 }
 
 function findById(id) {
-    return db('resources')
+    return db('resource')
         .where('id', id)
         .first()
 }
 
 function add(data) {
-    return db('resources')
+    return db('resource')
         .insert(data)
-        .then(() => {
-            return find()
-        })
 }

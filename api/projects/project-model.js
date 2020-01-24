@@ -16,9 +16,10 @@ function find() {
 function findById(id) {
     return db('task')
         .where('project_id', id)
+        .select('id', 'description', 'notes', 'completed')
         .then(tasks => {
             return db('project')
-                .where('project_id', id)
+                .where('id', id)
                 .first()
                 .then(project => {
                     return {
@@ -35,13 +36,13 @@ function add(data) {
 }
 
 function addTask(data) {
-    return db('task as t')
+    return db('task')
         .insert(data)
 }
 
 function findTasks(id) {
     return db('task as t')
         .where('t.project_id', id)
-        .join('project as p', 't.project_id', 'p.project_id')
-        .select('t.task_id', 'p.project_name', 'p.project_description', 't.task_description', 't.task_notes', 't.task_completed')
+        .join('project as p', 't.project_id', 'p.id')
+        .select('t.id', 'p.name as project_name', 'p.description as project_description', 't.description as task_description', 't.notes', 't.completed')
 }
