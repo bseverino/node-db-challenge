@@ -1,4 +1,5 @@
 const db = require('../../data/db-config.js')
+const knex = require('knex')
 
 module.exports = {
     find,
@@ -9,31 +10,38 @@ module.exports = {
 }
 
 function find() {
-    return db('projects')
+    return db('project')
 }
 
 function findById(id) {
-    return db('projects')
-        .where('id', id)
-        .first()
-}
-
-function add(data) {
-    return db('projects')
-        .insert(data)
-        .then(() => {
-            return find()
+    return db('task')
+        .where('project_id', id)
+        .then(tasks => {
+            return db('project')
+                .where('project_id', id)
+                .first()
+                .then(project => {
+                    return {
+                        ...project,
+                        tasks
+                    }
+                })
         })
 }
 
+function add(data) {
+    return db('project')
+        .insert(data)
+}
+
 function addTask(data) {
-    return db('tasks as t')
+    return db('task as t')
         .insert(data)
 }
 
 function findTasks(id) {
-    return db('tasks as t')
+    return db('task as t')
         .where('t.project_id', id)
-        .join('projects as p', 't.project_id', 'p.id')
-        .select('t.id', 'p.name as project_name', 'p.description as project_description', 't.description as task_description', 't.notes', 't.completed')
+        .join('project as p', 't.project_id', 'p.project_id')
+        .select('t.task_id', 'p.project_name', 'p.project_description', 't.task_description', 't.task_notes', 't.task_completed')
 }

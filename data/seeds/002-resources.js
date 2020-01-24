@@ -1,23 +1,23 @@
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('resources').del()
+  return knex('resource').del()
     .then(function () {
       // Inserts seed entries
-      return knex('resources').insert([
+      return knex('resource').insert([
         {
-          id: 1,
-          name: 'Lambda Student',
-          description: 'a soon to be hired developer'
+          resource_id: 1,
+          resource_name: 'Lambda Student',
+          resource_description: 'a soon to be hired developer'
         },
         {
-          id: 2,
-          name: 'MacBook Pro #1',
-          description: 'an overly expensive laptop computer'
+          resource_id: 2,
+          resource_name: 'MacBook Pro #1',
+          resource_description: 'an overly expensive laptop computer'
         },
         {
-          id: 3,
-          name: 'coffee',
-          description: 'for energy'
+          resource_id: 3,
+          resource_name: 'coffee',
+          resource_description: 'for energy'
         }
       ]);
     });
