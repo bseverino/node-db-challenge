@@ -18,15 +18,22 @@ function findById(id) {
         .where('project_id', id)
         .select('id', 'description', 'notes', 'completed')
         .then(tasks => {
-            return db('project')
-                .where('id', id)
-                .first()
-                .then(project => {
-                    return {
-                        ...project,
-                        tasks
-                    }
-                })
+            return db('project_resource as x')
+                .where('project_id', id)
+                .join('resource as r', 'x.resource_id', 'r.id')
+                .select('r.id', 'r.name', 'r.description')
+                .then(resources => {
+                    return db('project')
+                        .where('id', id)
+                        .first()
+                        .then(project => {
+                            return {
+                                ...project,
+                                tasks,
+                                resources
+                            }
+                        })
+            })
         })
 }
 
