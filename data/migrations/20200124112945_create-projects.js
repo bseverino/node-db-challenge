@@ -8,6 +8,7 @@ exports.up = function(knex) {
             .index()
         tbl.string('description')
         tbl.boolean('completed')
+            .defaultTo(0)
     })
 
     .createTable('resources', tbl => {
@@ -16,7 +17,6 @@ exports.up = function(knex) {
             .notNullable()
             .index()
         tbl.string('description')
-        tbl.boolean('completed')
     })
 
     .createTable('project_resources', tbl => {
@@ -50,6 +50,7 @@ exports.up = function(knex) {
             .notNullable()
         tbl.text('notes')
         tbl.boolean('completed')
+            .defaultTo(0)
     })
 
 };

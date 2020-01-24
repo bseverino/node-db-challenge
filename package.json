@@ -1,16 +1,16 @@
 {
-  "name": "db-challenge",
+  "name": "node-db-challenge",
   "version": "1.0.0",
   "description": "In this challenge, you design and build a Data Model and a RESTful API that stores data into a Relational Database.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "nodemon index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bseverino/node-db-challenge.git"
   },
-  "author": "",
+  "author": "Bianca Severino",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/bseverino/node-db-challenge/issues"
@@ -20,6 +20,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "knex": "^0.20.8",
+    "nodemon": "^2.0.2",
     "pg": "^7.17.1"
   }
 }
